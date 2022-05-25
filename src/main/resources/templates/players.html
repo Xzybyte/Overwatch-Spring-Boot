@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/main.css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" href="../css/players.css" th:href="@{/css/players.css}">
+    <script src="../js/script.js" th:src="@{/js/script.js}"></script>
+</head>
+<body>
+    <header th:insert="supplement.html :: navigation"></header>
+    <div class="players">
+        <span class="page-name">
+                CAREER OVERVIEW
+            </span>
+        <br>
+        <span class="page-excerpt">
+
+        </span>
+        <div class="summary-container">
+            <div class="player-avatar">
+                <img id="avatar" th:src="@{${player.getSummary().getAvatar()}}" alt="Avatar">
+                <br>
+            </div>
+            <div class="player-username">
+                <br>
+                <span>
+                    [[${player.getSummary().getUsername()}]]
+                </span>
+            </div>
+            <div class="player-level" th:style="'background-image: url(' + ${player.getSummary().getLevel().getBorder()} + '); background-size: 128px 128px; background-repeat: no-repeat;'">
+                <span>[[${player.getSummary().getLevel().getValue()}]]</span>
+                <th:block th:if="${player.getSummary().getLevel().getRank() != null}">
+                    <div class="player-rank" th:style="'background-image: url(' + ${player.getSummary().getLevel().getRank()} + '); background-size: 128px 64px; background-repeat: no-repeat;'">
+                    </div>
+                </th:block>
+            </div>
+            <div class="player-endorsement" th:style="'background-image: url(' + ${player.getSummary().getEndorsement().getFrame()} + '); background-size: 100px 100px; background-repeat: no-repeat;'">
+                <span>[[${player.getSummary().getEndorsement().getLevel()}]]</span>
+            </div>
+        </div>
+        <th:block th:if="${player.getSummary().getPrivacy().equals('private')}">
+            <div class="privacy-container">
+                <img src="/img/padlock.png" width="25px">
+                <br>
+                <span>
+                    This player's profile is private.
+                </span>
+                <br>
+                <img src="/img/padlock.png" width="25px">
+            </div>
+        </th:block>
+        <th:block th:if="${!player.getSummary().getPrivacy().equals('private')}">
+            <div class="data-container">
+                <div class="player-nav">
+                    <ul>
+                        <li onclick="changePlayerNav('profile')" id="player-nav-profile">
+                           <span>
+                               PROFILE
+                           </span>
+                        </li>
+                        <li onclick="changePlayerNav('heroes')" id="player-nav-heroes">
+                            <span>
+                                HEROES
+                            </span>
+                        </li>
+                        <li onclick="changePlayerNav('achievements')" id="player-nav-achievements">
+                            <span>
+                                ACHIEVEMENTS
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="player-container">
+                    <span id="player-container-title">
+                    </span>
+                    <div id="player-profile">
+                    </div>
+                    <div id="player-heroes">
+                    </div>
+                    <div id="player-achievements">
+                    </div>
+                </div>
+            </div>
+            <script th:inline="javascript">
+                saveObjects([[${player}]], [[${heroes}]]);
+            </script>
+        </th:block>
+    </div>
+    <footer th:insert="supplement.html :: footer"></footer>
+</body>
+</html>

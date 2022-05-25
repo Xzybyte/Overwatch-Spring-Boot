@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/main.css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{../css/maps.css}" href="../css/maps.css">
+    <script src="../js/script.js" th:src="@{/js/script.js}"></script>
+</head>
+<body>
+    <header th:insert="supplement.html :: navigation"></header>
+        <div class="maps">
+            <span class="page-name">
+                MAPS
+            </span>
+            <br>
+            <span class="page-excerpt">
+                Overwatch features several different maps based on locations, both fictional and real, around the world.
+            </span>
+            <div class="maps-container">
+                <ul>
+                    <li th:each="m: ${mapsList}">
+                        <div th:data-name="${m.getName()}" onclick="openModal(this.getAttribute('data-name'))">
+                            <img th:src="@{${m.getThumbnail()}}" alt="Thumbnail">
+                            <span>[[${m.getName()}]]</span>
+                            <br>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="maps-modal">
+                <div id="modal-content">
+                    <span id="close" onclick="closeModal()">&times;</span>
+                    <div id="modal-name">
+                    </div>
+                    <div id="modal-img">
+                        <img id="modal-flag" alt="Flag">
+                        <img id="modal-thumbnail" alt="Thumbnail">
+                    </div>
+                    <div id="modal-gamemodes">
+                        <br>
+                        <span>Available Game Modes</span>
+                        <br>
+                        <br>
+                        <div id="modal-gamemodes-descriptions">
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script th:inline="javascript">
+                saveMapObjects([[${modes}]], [[${mapsList}]]);
+            </script>
+        </div>
+    <footer th:insert="supplement.html :: footer"></footer>
+</body>
+</html>

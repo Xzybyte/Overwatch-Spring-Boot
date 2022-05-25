@@ -1,0 +1,95 @@
+.results {
+    padding-top: 30px;
+    text-align: center;
+}
+
+.page-name {
+    font-size: 70px;
+    text-decoration: underline;
+    color: #ffffff;
+}
+
+.page-info {
+    font-size: 20px;
+    font-style: italic;
+    color: #f5f5f5;
+}
+
+.results-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: auto auto 35px;
+    border: solid #4b99dc 1px;
+    background-color: #19262c;
+    width: 75%;
+}
+
+.results ul, .results li {
+    list-style: none;
+    padding: 0;
+}
+
+.results ul {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+    margin: auto;
+    width: 80%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.results li {
+    display: flex;
+    flex-direction: row;
+    border: solid #f99e1a 1px;
+    margin: 15px 15px;
+    width: 300px;
+    height: 50px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.results li a, .results li a:visited {
+    display: flex;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #bb420c;
+    width: 300px;
+    outline: none;
+}
+
+.player-icon img {
+    width: 50px;
+}
+
+.player-name, .player-level, .player-platform {
+    margin: auto 0;
+}
+
+.player-name {
+    flex: 2;
+    width: 125px;
+}
+
+.player-level {
+    width: 30px;
+}
+
+.player-platform {
+    flex: 1;
+}
+
+@media screen and (max-width: 1179px){
+    .results-container {
+        border: solid #4b99dc 2px;
+    }
+
+    .page-info {
+        font-size: 35px;
+    }
+}

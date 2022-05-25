@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/main.css" th:href="@{/css/main.css}">
+</head>
+<body>
+    <header th:insert="supplement.html :: navigation"></header>
+
+    <div class="content">
+        <span class="title">
+            A Simple Overwatch Site
+        </span>
+        <div class="search">
+            <span>
+                Start by searching a name.
+            </span>
+            <form method="post" action="/search">
+                <input type="text" name="player" id="player" placeholder="Search for a player">
+                <input type="submit" value="Submit" id="search">
+            </form>
+        </div>
+        <span class="details">
+            Made with <a href="https://github.com/TeKrop/overfast-api">Overfast API</a>, and Spring Boot
+        </span>
+    </div>
+    <footer th:insert="supplement.html :: footer"></footer>
+</body>
+</html>

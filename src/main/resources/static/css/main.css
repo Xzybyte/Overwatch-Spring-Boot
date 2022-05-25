@@ -1,0 +1,164 @@
+@font-face {
+    font-family: "LeagueSpartan";
+    src: url("../font/LeagueSpartan-Regular.ttf") format("truetype");
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+    min-height: 75px;
+    background-color: #111111;
+    border-bottom: solid #f99e1a 1px;
+}
+
+footer {
+    margin-top: auto;
+    min-height: 50px;
+    background-color: #111111;
+    border-top: solid #f99e1a 1px;
+}
+
+.nav ul, .nav li, .footer ul, .footer li  {
+    list-style: none;
+    padding: 0;
+}
+
+.nav ul, .footer ul {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    gap: 40px;
+}
+
+.nav li {
+    padding: 10px 15px;
+}
+
+.footer li {
+    padding: 5px 15px;
+}
+
+.nav span {
+    font-size: 25px;
+    color: #f99e1a;
+}
+
+.footer span {
+    font-size: 20px;
+    color: #f99e1a;
+}
+
+.nav a, .nav a:visited, .footer a, .footer a:visited {
+    text-decoration: none;
+    color: #f99e1a;
+    outline: none;
+}
+.logo {
+
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 500px;
+}
+
+.title {
+    padding-top: 10%;
+    font-size: 75px;
+    color: white;
+    text-align: center;
+}
+
+.details {
+    font-size: 45px;
+    color: white;
+    text-align: center;
+}
+
+.details a, details a:visited {
+    color: #f99e1a;
+}
+
+.search span {
+    font-size: 25px;
+    color: white;
+    text-align: center;
+}
+
+.search {
+    margin: auto;
+}
+
+.search form #player {
+    width: 200px;
+    height: 25px;
+}
+
+body{
+    height:100vh;
+    margin:0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'LeagueSpartan', Arial, sans-serif;
+    background-color: #11191a;
+}
+
+@media screen and (max-width: 1179px) {
+    .nav {
+        border-bottom: solid #f99e1a 2px;
+    }
+
+    footer {
+        border-top: solid #f99e1a 2px;
+    }
+
+}

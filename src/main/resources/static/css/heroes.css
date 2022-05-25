@@ -1,0 +1,205 @@
+.heroes, .hero {
+    padding-top: 30px;
+    text-align: center;
+}
+
+.page-name, .hero-name {
+    font-size: 70px;
+    text-decoration: underline;
+    color: #ffffff;
+}
+
+.page-excerpt, .hero-phrase {
+    font-size: 20px;
+    font-style: italic;
+    color: #f5f5f5;
+}
+
+.heroes-container, .hero-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: auto auto 35px;
+    border: solid #4b99dc 1px;
+    background-color: #19262c;
+    width: 75%;
+}
+
+.heroes-role-name {
+    text-decoration: underline;
+    padding-top: 5px;
+    vertical-align: middle;
+    font-size: 50px;
+    color: #ffffff;
+}
+
+.heroes-desc {
+    font-size: 15px;
+    font-style: italic;
+    color: #b6b6b6;
+}
+
+.heroes-role img {
+    vertical-align: middle;
+    width: 40px;
+}
+
+.heroes-info span {
+    display: inline-block;
+    padding-top: 5px;
+    width: 100px;
+    background-color: #d3ced1;
+    border: solid #f99e1a 1px;
+}
+
+.heroes-info img, .hero-image img {
+    display: block;
+    margin: auto;
+    width: 80px;
+    border: solid #f99e1a 2px;
+    background-color: white;
+}
+
+.heroes ul, .heroes li, .hero-abilities ul, .hero-abilities li, .hero-media ul, .hero-media li {
+    list-style: none;
+    padding: 0;
+}
+
+.heroes ul, .hero-abilities ul, .hero-media ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+.heroes li, .hero-abilities li, .hero-media li {
+    padding: 10px 15px;
+}
+
+.heroes li {
+    transition: transform .2s;
+}
+
+.heroes li:hover {
+    transform: scale(1.4);
+}
+
+.damage ul {
+    width: 85%;
+}
+
+.damage, .support, .tank {
+    padding-top: 3%;
+}
+
+.heroes a, .heroes a:visited {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #bb420c;
+    outline: none;
+}
+
+.hero-image {
+    padding-top: 2%;
+}
+
+.hero-image img {
+    width: 150px;
+}
+
+.hero-role span, .hero-difficulty span, .hero-description span, .hero-weapons span, .hero-abilities > span, .hero-biography span, .hero-media > span {
+    font-size: 35px;
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.hero-role, .hero-description, .hero-weapons, .hero-abilities, .hero-biography, .hero-media li span {
+    margin: auto;
+    color: #bb420c;
+    font-size: 18px;
+    width: 80%;
+}
+
+.hero-container p {
+    background-color: #d3ced1;
+    border: solid #f99e1a 2px;
+}
+
+.hero-backstory {
+    color: #8cb2e5;
+}
+
+.hero-secondary-weapon span {
+    font-size: 20px;
+}
+
+.hero-abilities li {
+    width: 400px;
+    height: 170px;
+}
+
+.hero-abilities img {
+    width: 128px;
+}
+
+.hero-media .images img {
+    width: 350px;
+}
+
+.hero-media a {
+    text-decoration: none;
+}
+
+.videos iframe, .images img, .pdfs img {
+    border: solid #f99e1a 2px;
+    background-color: white;
+}
+
+@media screen and (max-width: 1179px) {
+    .page-name {
+        font-size: 90px;
+    }
+
+    .page-excerpt {
+        font-size: 25px;
+    }
+
+    .heroes-role-name {
+        font-size: 70px;
+    }
+
+    .heroes-desc {
+        font-size: 25px;
+    }
+
+    .hero-secondary-weapon span {
+        font-size: 32px;
+    }
+
+    .hero-role, .hero-description, .hero-weapons, .hero-abilities, .hero-biography, .hero-media li span {
+        font-size: 30px;
+    }
+
+    .hero-role span, .hero-difficulty span, .hero-description span, .hero-weapons span, .hero-abilities > span, .hero-biography span, .hero-media > span {
+        font-size: 50px;
+    }
+
+    .heroes-container, .hero-container {
+        border: solid #4b99dc 3px;
+    }
+
+    .heroes-info img, .hero-image img {
+        border: solid #f99e1a 3px;
+        width: 200px;
+    }
+
+    .heroes-info span {
+        width: 230px;
+        font-size: 35px;
+    }
+
+    .videos iframe, .images img, .pdfs img {
+        border: solid #f99e1a 3px;
+    }
+}

@@ -1,0 +1,278 @@
+.players {
+    padding-top: 30px;
+    text-align: center;
+}
+
+.page-name {
+    font-size: 70px;
+    text-decoration: underline;
+    color: #ffffff;
+}
+
+.summary-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin: auto auto 35px;
+    border: solid #4b99dc 1px;
+    background-color: #19262c;
+    width: 510px;
+}
+
+.privacy-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    border: solid #4b99dc 1px;
+    background-color: #19262c;
+    margin: 50px auto auto;
+    width: 900px;
+}
+
+.data-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.player-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: solid #4b99dc 1px;
+    background-color: #19262c;
+    margin: auto auto 35px;
+    width: 75%;
+}
+
+.privacy-container span {
+    color: white;
+    font-size: 30px;
+    background-color: #19262c;
+}
+
+.player-avatar, .player-username {
+    display: flex;
+    margin: auto;
+}
+
+.player-avatar {
+    border: solid #f99e1a 1px;
+}
+
+.player-username span {
+    color: white;
+    font-size: 25px;
+}
+
+.player-level span {
+    color: white;
+    font-size: 15px;
+}
+
+.player-level {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 128px;
+    height: 128px;
+}
+
+.player-level span, .player-endorsement span {
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.player-endorsement {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 100px;
+    height: 100px;
+}
+
+.player-endorsement span {
+    color: purple;
+}
+
+.player-rank {
+    position: relative;
+    top: 75%;
+    transform: translateY(-75%);
+    width: 128px;
+    height: 64px;
+}
+
+#avatar, #border, #rank {
+    width: 100px;
+}
+
+#qp, #comp {
+    color: #bb420c;
+    border: solid #f99e1a 1px;
+    background-color: black;
+}
+
+#qp:hover, #comp:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#quickplay ul, #quickplay li, #competitive ul, #competitive li, .player-nav li, #player-heroes ul, #player-heroes li, #player-achievements ul, #player-achievements li {
+    list-style: none;
+}
+
+#quickplay li, #competitive li, .player-nav li, #player-heroes li, #player-achievements ul, #player-achievements li {
+    padding: 10px 15px;
+}
+
+#hero-name {
+    color: #ffffff;
+    font-size: 40px;
+    text-decoration: underline;
+}
+
+#category-name, #records {
+    color: #ffffff;
+    font-size: 25px;
+    text-decoration: underline;
+}
+
+#hero-categories {
+    color: #bb420c;
+    border: solid #f99e1a 2px;
+    background-color: black;
+}
+
+#hero-categories li:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.player-nav {
+    color: #bb420c;
+    border: solid #f99e1a 1px;
+    width: 308px;
+    margin: auto;
+    background-color: black;
+}
+
+.player-nav ul {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin: auto;
+}
+
+.player-nav li:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#player-profile {
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+#player-container-title {
+    padding-top: 10px;
+    font-size: 50px;
+    color: white;
+    text-decoration: underline;
+}
+
+#damage-title, #support-title, #tank-title {
+    font-size: 30px;
+    color: white;
+    text-decoration: underline;
+}
+
+#damage-rank, #support-rank, #tank-rank {
+    padding: 0 25px;
+}
+
+#damage-tier, #support-tier, #tank-tier {
+    display: block;
+}
+
+#damage-rating, #support-rating, #tank-rating {
+    display: inline-block;
+    padding-top: 2%;
+    width: 90px;
+    border: solid #f99e1a 2px;
+    color: #bb420c;
+    background-color: #d3ced1;
+}
+
+#quickplay ul, #competitive ul, #player-heroes ul, #player-achievements ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: auto;
+}
+
+#player-achievements img {
+    width: 50px;
+}
+
+#player-achievements-container > span {
+    font-size: 35px;
+    color: white;
+    text-decoration: underline;
+}
+
+#player-achievements li {
+    width: 300px;
+    height: 110px;
+}
+
+#achievement-title {
+    text-decoration: underline;
+}
+
+#achievement-container {
+    color: #bb420c;
+    border: solid #f99e1a 2px;
+    background-color: #d3ced1;
+}
+
+@media screen and (max-width: 1179px) {
+    .summary-container, .player-container {
+        border: solid #4b99dc 2px;
+    }
+
+    .player-nav {
+        width: 550px;
+        font-size: 35px;
+    }
+
+    #qp, #comp {
+        border: solid #f99e1a 3px;
+    }
+
+    #hero-categories {
+        border: solid #f99e1a 2px;
+    }
+
+    #hero-name {
+        font-size: 50px;
+    }
+
+    #category-name, #records {
+        font-size: 45px;
+    }
+
+    #quickplay ul, #competitive ul, #player-heroes ul, #player-achievements ul {
+        font-size: 30px;
+    }
+
+    #player-achievements li {
+        width: 550px;
+        height: 160px;
+    }
+}

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{../css/main.css}" href="../css/main.css">
+    <link rel="stylesheet" th:href="@{../css/heroes.css}" href="../css/heroes.css">
+</head>
+<body>
+    <header th:insert="supplement.html :: navigation"></header>
+
+    <th:block th:if="${hero == null}">
+        <div class="heroes">
+            <span class="page-name">
+                HEROES
+            </span>
+            <br>
+            <span class="page-excerpt">
+                "The world could always use more heroes."
+            </span>
+            <div class="heroes-container">
+                <th:block th:each="r: ${role}">
+                    <div th:class="${r.getKey()}">
+                        <div class="heroes-role">
+                            <img th:src="@{'../img/' + ${r.getKey()} + '-icon.png'}" alt="Role Icon">
+                            &nbsp;
+                            <span class="heroes-role-name">
+                                [[${r.getKey().toUpperCase()}]]
+                            </span>
+                            <br>
+                            <span class="heroes-desc">
+                                [[${roleDescriptions.get(r.getKey())}]]
+                            </span>
+                        </div>
+                        <div class="heroes-info">
+                            <ul>
+                                <li th:each="sr : ${r.getValue()}">
+                                    <a th:href="@{'heroes/' + ${sr.getKey()}}">
+                                        <img th:src="@{${sr.getPortrait()}}" alt="Hero Portrait">
+                                        <span>[[${sr.getName()}]]</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </th:block>
+    <th:block th:unless="${hero == null}">
+        <div class="hero">
+            <span class="hero-name">
+                [[${hero.getName().toUpperCase()}]]
+            </span>
+            <br>
+            <span class="hero-phrase">
+                <th:block th:if="${hero.getStory().getCatchPhrase() != null}">
+                    "[[${hero.getStory().getCatchPhrase()}]] "
+                </th:block>
+            </span>
+            <div class="hero-container">
+                <div class="hero-image">
+                    <img th:src="@{${heroImage}}" alt="Hero Portrait">
+                </div>
+                <div class="hero-difficulty">
+                    <br>
+                    <span>
+                        DIFFICULTY
+                    </span>
+                    <br>
+                    <th:block th:each="i: ${#numbers.sequence(1, hero.getDifficulty())}">
+                        <img src="../img/star.png" alt="Star">
+                    </th:block>
+                </div>
+                <div class="hero-role">
+                    <br>
+                    <span>
+                        ROLE
+                    </span>
+                    <br>
+                    <p>
+                        [[${hero.getRole().toUpperCase()}]]
+                    </p>
+                    <br>
+                </div>
+                <div class="hero-description">
+                    <br>
+                    <br>
+                    <span>
+                        DESCRIPTION
+                    </span>
+                    <br>
+                    <p>
+                        [[${hero.getDescription()}]]
+                    </p>
+                </div>
+                <div class="hero-weapons">
+                    <br>
+                    <br>
+                    <span>
+                        WEAPON
+                    </span>
+                    <br>
+                    <th:block th:each="weapons : ${hero.getWeapons()}">
+                        <img th:src="@{${weapons.getIcon()}}" alt="Weapon Icon">
+                        <br>
+                        <p><u>[[${weapons.getPrimaryFire().getName()}]]</u>
+                        <br>
+                        [[${weapons.getPrimaryFire().getDescription()}]]</p>
+                        <br>
+                        <th:block th:if="${weapons.getSecondaryFire() != null}">
+                            <br>
+                            <div class="hero-secondary-weapon">
+                                <span>
+                                    Secondary Weapon
+                                </span>
+                            </div>
+                            <p><u>[[${weapons.getSecondaryFire().getName()}]]</u>
+                            <br>
+                                [[${weapons.getSecondaryFire().getDescription()}]]</p>
+                            <br>
+                        </th:block>
+                        <br>
+                        <br>
+                    </th:block>
+                </div>
+                <div class="hero-abilities">
+                    <span>
+                        ABILITIES
+                    </span>
+                    <ul>
+                        <li th:each="abilities : ${hero.getAbilities()}">
+                            <img th:src="@{${abilities.getIcon()}}" alt="Ability Icon">
+                            <br>
+                            <p>
+                                <u>[[${abilities.getName()}]]</u>
+                                <br>
+                                [[${abilities.getDescription()}]]
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="hero-biography">
+                    <br>
+                    <br>
+                    <span>
+                        BIOGRAPHY
+                    </span>
+                    <br>
+                    <p>[[${hero.getStory().getBiography().getRealName()}]]
+                    <br>
+                    [[${hero.getStory().getBiography().getAge()}]]
+                    <br>
+                    [[${hero.getStory().getBiography().getOccupation()}]]
+                    <br>
+                    [[${hero.getStory().getBiography().getBaseOfOperations()}]]
+                    <br>
+                    [[${hero.getStory().getBiography().getAffiliation()}]]
+                    <br>
+                    <br>
+                        [[${hero.getStory().getBackStory()}]]
+                    </p>
+                </div>
+                <div class="hero-media">
+                    <br>
+                    <br>
+                    <span>
+                        MEDIA
+                    </span>
+                    <div class="videos">
+                        <ul>
+                            <li th:each="v : ${videos}">
+                                <span>
+                                    [[${v.getTitle()}]]
+                                </span>
+                                <br>
+                                <iframe width="420" height="345" th:src="@{${v.getEmbedLink()}}">
+                                </iframe>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="images">
+                        <ul>
+                            <li th:each="i : ${images}">
+                                <a th:href="@{${i.getLink()}}">
+                                    <br>
+                                    <img th:src="@{${i.getThumbnail()}}" alt="Thumbnail">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pdfs">
+                        <ul>
+                            <li th:each="p : ${pdfs}">
+                                <a th:href="@{${p.getLink()}}">
+                                    <span>
+                                        [[${p.getTitle()}]]
+                                    </span>
+                                    <br>
+                                    <img th:src="@{${p.getThumbnail()}}" alt="Thumbnail">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+    <footer th:insert="supplement.html :: footer"></footer>
+</body>
+</html>

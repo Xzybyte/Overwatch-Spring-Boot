@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/main.css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" href="../css/search.css" th:href="@{/css/search.css}">
+</head>
+<body>
+<header th:insert="supplement.html :: navigation"></header>
+<div class="results">
+    <span class="page-name">
+        PLAYER SEARCH
+    </span>
+    <br>
+    <span class="page-info">
+        You searched for "[[${searchTerm}]]".
+        <th:block th:if="${total > 20}">
+            <br>
+            Can't find what you're looking for? Your search exceeds the maximum of 20 results ([[${total}]] returned).
+            <br>
+            Enter a new search.
+        </th:block>
+        <th:block th:unless="${total > 20}">
+            <br>
+            Can't find what you're looking for? Enter a new search.
+        </th:block>
+        <div class="search">
+            <form method="post" action="/search">
+                <input type="text" name="player" id="player" placeholder="Search for a player" required>
+                <input type="submit" value="Submit" id="search">
+            </form>
+        </div>
+    </span>
+    <div class="results-container">
+        <ul>
+            <li th:each="r: ${results}">
+                <a th:href="@{'/players/' + ${r.getPlatform()} + '/' + ${r.getPlayerId()}}">
+                    <div class="player-icon">
+                        <img th:src="${r.getPortraitUrl()}">
+                    </div>
+                    <div class="player-name">
+                        <span>[[${r.getName()}]]</span>
+                    </div>
+                    <div class="player-level">
+                        <span>[[${r.getLevel()}]]</span>
+                    </div>
+                    <div class="player-platform">
+                        <span>[[${r.getPlatform()}]]</span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<footer th:insert="supplement.html :: footer"></footer>
+</body>
+</html>
