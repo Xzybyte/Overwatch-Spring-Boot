@@ -111,10 +111,12 @@ function displayProfile() {
         tierImg.setAttribute("id", element + "-tier");
         tierImg.setAttribute("width", "128px");
         tierImg.setAttribute("src", tiers[index]);
+        tierImg.setAttribute("alt", element + "-tier");
 
         const iconImg = document.createElement("img");
         iconImg.setAttribute("id", element + "-icon");
         iconImg.setAttribute("src", icons[index]);
+        iconImg.setAttribute("alt", element + "-icon");
 
         roleDiv.appendChild(titleSpan);
         roleDiv.appendChild(tierImg);
@@ -182,6 +184,7 @@ function loadAchievementType(name, type) {
 
         const img = document.createElement("img");
         img.setAttribute("src", type[key]["image"]);
+        img.setAttribute("alt", "Achievement Image");
 
         const achievementDiv = document.createElement("div");
         achievementDiv.setAttribute("id", "achievement-container")
@@ -278,6 +281,7 @@ function generateGeneral(doc, name, hero) {
     if (portrait != null) {
         const img = document.createElement("img");
         img.setAttribute("src", portrait);
+        img.setAttribute("alt", "Hero Portrait Image")
         img.style.backgroundColor = "#ffffff";
         img.style.border = "1px solid #f99e1a";
         heroDiv.appendChild(img);

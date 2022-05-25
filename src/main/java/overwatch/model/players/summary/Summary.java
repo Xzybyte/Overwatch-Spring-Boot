@@ -1,6 +1,5 @@
 package overwatch.model.players.summary;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import overwatch.model.players.summary.endorsement.Endorsement;

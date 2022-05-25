@@ -2,9 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Overman</title>
     <link rel="stylesheet" th:href="@{../css/main.css}" href="../css/main.css">
     <link rel="stylesheet" th:href="@{../css/heroes.css}" href="../css/heroes.css">
+    <link rel="icon" type="image/png" th:href="@{/img/favicon.ico}"/>
 </head>
 <body>
     <header th:insert="supplement.html :: navigation"></header>
@@ -182,7 +183,7 @@
                     <div class="images">
                         <ul>
                             <li th:each="i : ${images}">
-                                <a th:href="@{${i.getLink()}}">
+                                <a th:href="@{${i.getLink()}}" target="_blank">
                                     <br>
                                     <img th:src="@{${i.getThumbnail()}}" alt="Thumbnail">
                                 </a>
