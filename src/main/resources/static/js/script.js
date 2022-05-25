@@ -1,27 +1,84 @@
+/**
+ * Load the default profile view
+ */
 document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementsByClassName("data-container").item(0) != null) {
         changePlayerNav("profile"); // Load default profile view
     }
 });
 
+/**
+ *
+ * @param event
+ * Binds on click to the map modal
+ */
 window.onclick = function(event) {
     if (event.target === document.getElementById("maps-modal")) {
         document.getElementById("maps-modal").style.display = "none";
     }
 }
 
-let currentNav = ""; // Current navigation variable (Profile, Heroes, Achievements)
-let currentView = "default"; // Current view of hero (Heroes)
-let currentModeView = "qp"; // Current mode view in Heroes tab (Quickplay, Competitive)
-let quickplay; // Quickplay div
+/**
+ * Current navigation variable (Profile, Heroes, Achievements)
+ * @type {string}
+ */
+let currentNav = "";
+
+/**
+ * Current view of hero (Heroes)
+ * @type {string}
+ */
+let currentView = "default";
+
+/**
+ * Current mode view in Heroes tab (Quickplay, Competitive)
+ * @type {string}
+ */
+let currentModeView = "qp";
+
+/**
+ * Quickplay div
+ * @type {HTMLDivElement}
+ */
+let quickplay;
+
+/**
+ * Competitive div
+ * @type {HTMLDivElement}
+ */
 let competitive; // Competitive div
+
+/**
+ * Player stats
+ * @type {{JSON}}
+ */
 let playerObj; // Player stats
+
+/**
+ * Heroes information
+ * @type {*}
+ */
 let heroesObj; // Heroes information
+
+/**
+ * Bool to load the default view for quickplay or competitive
+ * @type {boolean}
+ */
 let loadDefault = false;
 
+/**
+ * Game Modes information
+ * @type {*}
+ */
 let gameModesObj;
+
+/**
+ * Map information
+ * @type {*}
+ */
 let mapsObj;
-/***
+
+/**
  * @param player Object of player stats
  * @param heroes Object of hero stats
  * @description Save the player and heroes object
@@ -31,17 +88,23 @@ function saveObjects(player, heroes) {
     heroesObj = heroes;
 }
 
+/**
+ * @param modes - Object of game modes
+ * @param maps - Object of maps
+ */
 function saveMapObjects(modes, maps) {
     gameModesObj = modes;
     mapsObj = maps;
 }
-/***
- * @param nav
+
+/**
+ *
+ * @param nav - Navigation to switch to
  */
 function changePlayerNav(nav) {
-    if (nav === currentNav) {
+    if (nav === currentNav) { // If selected nav is the same as current
         return;
-    } else if (currentNav.length > 0 && nav !== currentNav) {
+    } else if (currentNav.length > 0 && nav !== currentNav) { // If current nav is not empty and nav is not equal to current
         const navElement = document.getElementById("player-nav-" + currentNav);
         navElement.style.backgroundColor = "";
         document.getElementById("player-" + currentNav).innerHTML = "";
@@ -49,7 +112,7 @@ function changePlayerNav(nav) {
     currentNav = nav;
     const navElement = document.getElementById("player-nav-" + currentNav);
     navElement.style.backgroundColor = "#ffffff";
-    switch (nav) {
+    switch (nav) { // Only 3 navigation types to view
         case "profile":
             displayProfile();
             break;
@@ -62,6 +125,9 @@ function changePlayerNav(nav) {
     }
 }
 
+/**
+ * Display player profile
+ */
 function displayProfile() {
     const profile = document.getElementById("player-profile");
 
@@ -127,6 +193,9 @@ function displayProfile() {
     }
 }
 
+/**
+ * Display player heroes
+ */
 function displayHeroes() {
     const ul = document.createElement("ul");
 
@@ -159,10 +228,13 @@ function displayHeroes() {
     changeMode("qp");
 }
 
+/**
+ * Display player achievements
+ */
 function displayAchievements() {
     const title = document.getElementById("player-container-title");
     title.innerHTML = "ACHIEVEMENTS";
-    const achievementTypes = ["general", "damage", "tank", "support", "maps", "events"];
+    const achievementTypes = ["general", "damage", "tank", "support", "maps", "events"]; // List of achievement types
     for (let achievement in achievementTypes) {
         let name = achievementTypes[achievement];
         const a = playerObj["achievements"][name];
@@ -172,6 +244,11 @@ function displayAchievements() {
     }
 }
 
+/**
+ *
+ * @param name - Name of achievement
+ * @param type - Type of achievement
+ */
 function loadAchievementType(name, type) {
     const div = document.createElement("div");
     div.setAttribute("id", "player-achievements-container");
@@ -204,16 +281,17 @@ function loadAchievementType(name, type) {
         li.appendChild(img);
         li.appendChild(achievementDiv);
         ul.appendChild(li);
-        //console.log(type[key]);
     }
     div.appendChild(span);
     div.appendChild(ul);
     document.getElementById("player-achievements").appendChild(div);
 }
 
+/**
+ *
+ * @param mode - Mode to switch to (Quickplay, Competitive)
+ */
 function changeMode(mode) {
-    // Create modes
-
     document.getElementById(currentModeView).style.backgroundColor = "";
     if (currentModeView !== mode) {
         loadDefault = true;
@@ -223,6 +301,10 @@ function changeMode(mode) {
     generateViews(mode === "qp" ? playerObj["quickplay"]["career_stats"] : playerObj["competitive"]["career_stats"])
 }
 
+/**
+ *
+ * @param stats - Which view to display and generate
+ */
 function generateViews(stats) {
     if (currentModeView === "qp") {
         competitive.innerHTML = "";
@@ -235,6 +317,11 @@ function generateViews(stats) {
     }
 }
 
+/**
+ *
+ * @param doc - Div document
+ * @param career - Career stats to generate
+ */
 function generateMode(doc, career) {
     const ul = document.createElement("ul");
     ul.setAttribute("id", "hero-categories")
@@ -258,6 +345,12 @@ function generateMode(doc, career) {
     document.getElementById("player-heroes").appendChild(doc);
 }
 
+/**
+ *
+ * @param doc - Div document
+ * @param name - Name of the career category or hero to load
+ * @param hero - Hero object
+ */
 function generateGeneral(doc, name, hero) {
     if (name === currentView && !loadDefault) {
         return;
@@ -313,6 +406,11 @@ function generateGeneral(doc, name, hero) {
     generateRecord(doc, name);
 }
 
+/**
+ *
+ * @param doc - Div document
+ * @param stats - Stats object
+ */
 function generateInformation(doc, stats) {
     for (let key in stats) {
 
@@ -335,6 +433,11 @@ function generateInformation(doc, stats) {
     }
 }
 
+/**
+ *
+ * @param mode - Mode of record to load from
+ * @param name - Name of record
+ */
 function generateRecord(mode, name) {
     if (name === "all-heroes") {
         const records = document.createElement("div");
@@ -365,6 +468,11 @@ function generateRecord(mode, name) {
     }
 }
 
+/**
+ *
+ * @param ul - ul document
+ * @param comparison - comparison object
+ */
 function generateRecordInformation(ul, comparison) {
     const li = document.createElement("li");
 
@@ -398,6 +506,11 @@ function generateRecordInformation(ul, comparison) {
     ul.appendChild(li);
 }
 
+/**
+ *
+ * @param name - Name of hero
+ * @returns {string} - Hero image
+ */
 function getHeroPortrait(name) {
     let portrait;
     for (let key in heroesObj) {
@@ -409,6 +522,10 @@ function getHeroPortrait(name) {
     return portrait;
 }
 
+/**
+ *
+ * @param name - Name of map to load into a modal and open
+ */
 function openModal(name) {
 
     const mapObj = getMapObject(name);
@@ -433,10 +550,18 @@ function openModal(name) {
     document.getElementById("maps-modal").style.display = "block";
 }
 
+/**
+ * Close map modal
+ */
 function closeModal() {
     document.getElementById("maps-modal").style.display = "none";
 }
 
+/**
+ *
+ * @param name - Name of map object
+ * @returns {*}
+ */
 function getMapObject(name) {
     let mapObj;
     for (let key in mapsObj) {
@@ -447,6 +572,11 @@ function getMapObject(name) {
     return mapObj;
 }
 
+/**
+ *
+ * @param modes - Game modes to load
+ * @returns {*[]}
+ */
 function getGameModes(modes) {
     let modeInfo = [];
     for (let key in modes) {
@@ -456,7 +586,6 @@ function getGameModes(modes) {
                 modeInfo.push([gameModesObj[newKey]["name"], gameModesObj[newKey]["description"]]);
             }
         }
-       // console.log(modes[key]);
     }
     return modeInfo;
 }

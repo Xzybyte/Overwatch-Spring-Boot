@@ -25,13 +25,39 @@ import java.util.*;
 @Log4j2
 public class OverwatchController {
 
+    /**
+     * Rest template
+     */
     private RestTemplate restTemplate;
+
+    /**
+     * Heroes loaded from the API
+     */
     private Heroes[] heroes;
+
+    /**
+     * Maps loaded from the API
+     */
     private Maps[] maps;
+
+    /**
+     * Gamemodes loaded from the API
+     */
     private GameModes[] gameModes;
+
+    /**
+     * Heroes looked up by the users visiting the website
+     */
     private final List<Hero> heroList = new ArrayList<>();
+
+    /**
+     * API Url
+     */
     private final String url = "http://owapi.xzybyte.ca";
 
+    /**
+     * Load heroes, maps, and game modes
+     */
     @EventListener(ApplicationReadyEvent.class)
     public void loadData() {
         restTemplate = new RestTemplate();
@@ -61,11 +87,19 @@ public class OverwatchController {
         gameModes = modesEntity.getBody();
     }
 
+    /**
+     *
+     * @return Index page
+     */
     @GetMapping("/")
     public ModelAndView getIndex() {
         return new ModelAndView("index");
     }
 
+    /**
+     *
+     * @return Hero page
+     */
     @GetMapping("/heroes")
     public ModelAndView getHeroes() {
         ModelAndView mv = new ModelAndView("heroes");
@@ -85,6 +119,11 @@ public class OverwatchController {
         return mv;
     }
 
+    /**
+     *
+     * @param name - Name of hero
+     * @return Hero page
+     */
     @GetMapping("/heroes/{name}")
     public ModelAndView getHero(@PathVariable String name) {
         ModelAndView mv = new ModelAndView("heroes");
@@ -110,6 +149,10 @@ public class OverwatchController {
         return mv;
     }
 
+    /**
+     *
+     * @return Map page
+     */
     @GetMapping("/maps")
     public ModelAndView getMaps() {
         ModelAndView mv = new ModelAndView("maps");
@@ -118,6 +161,11 @@ public class OverwatchController {
         return mv;
     }
 
+    /**
+     *
+     * @param player - Player to search
+     * @return Search page
+     */
     @PostMapping("/search")
     public ModelAndView searchPlayer(@RequestParam String player) {
         ModelAndView mv = new ModelAndView("search");
@@ -136,6 +184,12 @@ public class OverwatchController {
         return mv;
     }
 
+    /**
+     *
+     * @param platform - Platform of player
+     * @param id - ID of player
+     * @return Player page
+     */
     @GetMapping("/players/{platform}/{id}")
     public ModelAndView getPlayer(@PathVariable String platform, @PathVariable String id) {
 
