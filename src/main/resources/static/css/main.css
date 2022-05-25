@@ -121,6 +121,13 @@ footer {
     text-align: center;
 }
 
+.error {
+    margin: auto;
+    font-size: 50px;
+    color: white;
+    text-align: center;
+}
+
 .details a, details a:visited {
     color: #f99e1a;
 }

@@ -3,6 +3,7 @@ package overwatch.controllers;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +20,15 @@ import overwatch.model.heroes.Heroes;
 import overwatch.model.maps.GameModes;
 import overwatch.model.maps.Maps;
 import overwatch.model.players.Player;
+import overwatch.model.players.summary.Platform;
 import overwatch.model.search.Search;
 
 import java.util.*;
 
 @Controller
+@Log4j2
 public class OverwatchController {
+
 
     private RestTemplate restTemplate;
     private Heroes[] heroes;
@@ -45,21 +49,26 @@ public class OverwatchController {
 
         restTemplate.getMessageConverters().add(0, converter);
 
-        ResponseEntity<Heroes[]> heroesEntity = restTemplate.getForEntity(url + "/heroes", Heroes[].class);
+        ResponseEntity<Heroes[]> heroesEntity;
+        ResponseEntity<Maps[]> mapsEntity;
+        ResponseEntity<GameModes[]> modesEntity;
+        try {
+            heroesEntity = restTemplate.getForEntity(url + "/heroes", Heroes[].class);
+            mapsEntity =  restTemplate.getForEntity(url + "/maps", Maps[].class);
+            modesEntity =  restTemplate.getForEntity(url + "/maps/gamemodes", GameModes[].class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+
         heroes = heroesEntity.getBody();
-
-        ResponseEntity<Maps[]> mapsEntity =  restTemplate.getForEntity(url + "/maps", Maps[].class);
         maps = mapsEntity.getBody();
-
-        ResponseEntity<GameModes[]> modesEntity =  restTemplate.getForEntity(url + "/maps/gamemodes", GameModes[].class);
         gameModes = modesEntity.getBody();
     }
 
     @GetMapping("/")
     public ModelAndView getIndex() {
-        ModelAndView mv = new ModelAndView("index");
-        mv.addObject("mapsList", Arrays.stream(maps).toList());
-        return mv;
+        return new ModelAndView("index");
     }
 
     @GetMapping("/heroes")
@@ -87,7 +96,13 @@ public class OverwatchController {
 
         Hero hero = heroList.stream().filter(h -> h.getName().toLowerCase().equals(name)).findFirst().orElse(null);
         if (hero == null) {
-            ResponseEntity<Hero> heroEntity = restTemplate.getForEntity(url + "/heroes/" + name, Hero.class);
+            ResponseEntity<Hero> heroEntity;
+            try {
+                heroEntity = restTemplate.getForEntity(url + "/heroes/" + name, Hero.class);
+            } catch (Exception e) {
+                log.error(e.getMessage());
+                return new ModelAndView("error");
+            }
             hero = heroEntity.getBody();
             heroList.add(hero);
         }
@@ -108,26 +123,17 @@ public class OverwatchController {
         return mv;
     }
 
-    @GetMapping("/maps/{name}")
-    public ModelAndView getMap(@PathVariable String name) {
-        ModelAndView mv = new ModelAndView("maps");
-
-        Maps map = Arrays.stream(maps).filter(m -> m.getName().equals(name.replaceAll("-", " "))).findFirst().orElse(null);
-        if (map == null) {
-            return mv;
-        }
-        List<GameModes> modes = new ArrayList<>();
-        Arrays.stream(gameModes).toList().forEach(mode -> map.getGameModes().stream().filter(key -> mode.getKey().equals(key)).map(key -> mode).forEach(modes::add));
-
-        mv.addObject("modes", modes);
-        mv.addObject("map", map);
-        return mv;
-    }
-
     @PostMapping("/search")
     public ModelAndView searchPlayer(@RequestParam String player) {
         ModelAndView mv = new ModelAndView("search");
-        ResponseEntity<Search> searchEntity = restTemplate.getForEntity(url + "/players?name=" + player, Search.class);
+
+        ResponseEntity<Search> searchEntity;
+        try {
+            searchEntity = restTemplate.getForEntity(url + "/players?name=" + player, Search.class);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return new ModelAndView("error");
+        }
 
         mv.addObject("searchTerm", player);
         mv.addObject("total", Objects.requireNonNull(searchEntity.getBody()).getTotal());
@@ -137,14 +143,28 @@ public class OverwatchController {
 
     @GetMapping("/players/{platform}/{id}")
     public ModelAndView getPlayer(@PathVariable String platform, @PathVariable String id) {
-        // do battletag empty
+
+        try {
+            Platform.valueOf(platform);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return new ModelAndView("error");
+        }
+
         ModelAndView mv = new ModelAndView("players");
-        ResponseEntity<Player> playerEntity = restTemplate.getForEntity(url + "/players/" + platform + "/" + id, Player.class);
+
+        ResponseEntity<Player> playerEntity;
+        try {
+            playerEntity = restTemplate.getForEntity(url + "/players/" + platform + "/" + id, Player.class);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return new ModelAndView("error");
+        }
 
         Player player = playerEntity.getBody();
 
         if (player == null) {
-            return mv;
+            return new ModelAndView("error");
         }
         mv.addObject("player", player);
         mv.addObject("heroes", Arrays.stream(heroes).toList());
