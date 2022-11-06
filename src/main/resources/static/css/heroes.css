@@ -136,11 +136,7 @@
 
 .hero-abilities li {
     width: 400px;
-    height: 170px;
-}
-
-.hero-abilities img {
-    width: 128px;
+    height: 220px;
 }
 
 .hero-media .images img {
@@ -183,6 +179,10 @@
 
     .hero-role span, .hero-difficulty span, .hero-description span, .hero-weapons span, .hero-abilities > span, .hero-biography span, .hero-media > span {
         font-size: 50px;
+    }
+
+    .hero-abilities li {
+        padding: 35px 15px;
     }
 
     .heroes-container, .hero-container {

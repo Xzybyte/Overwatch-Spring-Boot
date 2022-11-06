@@ -26,6 +26,11 @@ import java.util.*;
 public class OverwatchController {
 
     /**
+     * Maps and player searching currently disabled.
+     */
+
+
+    /**
      * Rest template
      */
     private RestTemplate restTemplate;
@@ -75,16 +80,16 @@ public class OverwatchController {
         ResponseEntity<GameModes[]> modesEntity;
         try {
             heroesEntity = restTemplate.getForEntity(url + "/heroes", Heroes[].class);
-            mapsEntity =  restTemplate.getForEntity(url + "/maps", Maps[].class);
-            modesEntity =  restTemplate.getForEntity(url + "/maps/gamemodes", GameModes[].class);
+           // mapsEntity =  restTemplate.getForEntity(url + "/maps", Maps[].class);
+           // modesEntity =  restTemplate.getForEntity(url + "/maps/gamemodes", GameModes[].class);
         } catch (Exception e) {
             e.printStackTrace();
             return;
         }
 
         heroes = heroesEntity.getBody();
-        maps = mapsEntity.getBody();
-        gameModes = modesEntity.getBody();
+      //  maps = mapsEntity.getBody();
+      //  gameModes = modesEntity.getBody();
     }
 
     /**
@@ -143,9 +148,9 @@ public class OverwatchController {
         Heroes h = Arrays.stream(heroes).filter(her -> her.getKey().equals(name)).findFirst().orElse(null);
         mv.addObject("heroImage", h != null ? h.getPortrait() : "");
         mv.addObject("hero", hero);
-        mv.addObject("videos", Objects.requireNonNull(hero).getMedias().stream().filter(m -> m.getType().equals("video")).toList());
-        mv.addObject("images", Objects.requireNonNull(hero).getMedias().stream().filter(m -> m.getType().equals("image")).toList());
-        mv.addObject("pdfs", Objects.requireNonNull(hero).getMedias().stream().filter(m -> m.getType().equals("pdf")).toList());
+        mv.addObject("videos", Objects.requireNonNull(hero).getMedias());
+      //  mv.addObject("images", Objects.requireNonNull(hero).getMedias().stream().filter(m -> m.getType().equals("image")).toList());
+      //  mv.addObject("pdfs", Objects.requireNonNull(hero).getMedias().stream().filter(m -> m.getType().equals("pdf")).toList());
         return mv;
     }
 

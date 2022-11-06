@@ -54,24 +54,9 @@
                 [[${hero.getName().toUpperCase()}]]
             </span>
             <br>
-            <span class="hero-phrase">
-                <th:block th:if="${hero.getStory().getCatchPhrase() != null}">
-                    "[[${hero.getStory().getCatchPhrase()}]] "
-                </th:block>
-            </span>
             <div class="hero-container">
                 <div class="hero-image">
                     <img th:src="@{${heroImage}}" alt="Hero Portrait">
-                </div>
-                <div class="hero-difficulty">
-                    <br>
-                    <span>
-                        DIFFICULTY
-                    </span>
-                    <br>
-                    <th:block th:each="i: ${#numbers.sequence(1, hero.getDifficulty())}">
-                        <img src="../img/star.png" alt="Star">
-                    </th:block>
                 </div>
                 <div class="hero-role">
                     <br>
@@ -86,7 +71,6 @@
                 </div>
                 <div class="hero-description">
                     <br>
-                    <br>
                     <span>
                         DESCRIPTION
                     </span>
@@ -94,36 +78,7 @@
                     <p>
                         [[${hero.getDescription()}]]
                     </p>
-                </div>
-                <div class="hero-weapons">
                     <br>
-                    <br>
-                    <span>
-                        WEAPON
-                    </span>
-                    <br>
-                    <th:block th:each="weapons : ${hero.getWeapons()}">
-                        <img th:src="@{${weapons.getIcon()}}" alt="Weapon Icon">
-                        <br>
-                        <p><u>[[${weapons.getPrimaryFire().getName()}]]</u>
-                        <br>
-                        [[${weapons.getPrimaryFire().getDescription()}]]</p>
-                        <br>
-                        <th:block th:if="${weapons.getSecondaryFire() != null}">
-                            <br>
-                            <div class="hero-secondary-weapon">
-                                <span>
-                                    Secondary Weapon
-                                </span>
-                            </div>
-                            <p><u>[[${weapons.getSecondaryFire().getName()}]]</u>
-                            <br>
-                                [[${weapons.getSecondaryFire().getDescription()}]]</p>
-                            <br>
-                        </th:block>
-                        <br>
-                        <br>
-                    </th:block>
                 </div>
                 <div class="hero-abilities">
                     <span>
@@ -141,27 +96,6 @@
                         </li>
                     </ul>
                 </div>
-                <div class="hero-biography">
-                    <br>
-                    <br>
-                    <span>
-                        BIOGRAPHY
-                    </span>
-                    <br>
-                    <p>[[${hero.getStory().getBiography().getRealName()}]]
-                    <br>
-                    [[${hero.getStory().getBiography().getAge()}]]
-                    <br>
-                    [[${hero.getStory().getBiography().getOccupation()}]]
-                    <br>
-                    [[${hero.getStory().getBiography().getBaseOfOperations()}]]
-                    <br>
-                    [[${hero.getStory().getBiography().getAffiliation()}]]
-                    <br>
-                    <br>
-                        [[${hero.getStory().getBackStory()}]]
-                    </p>
-                </div>
                 <div class="hero-media">
                     <br>
                     <br>
@@ -170,37 +104,8 @@
                     </span>
                     <div class="videos">
                         <ul>
-                            <li th:each="v : ${videos}">
-                                <span>
-                                    [[${v.getTitle()}]]
-                                </span>
-                                <br>
-                                <iframe width="420" height="345" th:src="@{${v.getEmbedLink()}}">
-                                </iframe>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="images">
-                        <ul>
-                            <li th:each="i : ${images}">
-                                <a th:href="@{${i.getLink()}}" target="_blank">
-                                    <br>
-                                    <img th:src="@{${i.getThumbnail()}}" alt="Thumbnail">
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="pdfs">
-                        <ul>
-                            <li th:each="p : ${pdfs}">
-                                <a th:href="@{${p.getLink()}}">
-                                    <span>
-                                        [[${p.getTitle()}]]
-                                    </span>
-                                    <br>
-                                    <img th:src="@{${p.getThumbnail()}}" alt="Thumbnail">
-                                </a>
-                            </li>
+                            <iframe width="960" height="540" th:src="@{${videos.getEmbedLink()}}">
+                            </iframe>
                         </ul>
                     </div>
                 </div>
