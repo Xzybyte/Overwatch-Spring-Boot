@@ -2,5 +2,7 @@
 
 A website on information of Overwatch heroes, maps, and modes.
 
-# Libraries
+# API
 - [Overfast](https://github.com/TeKrop/overfast-api)
+
+All image rights belong to Blizzard.
